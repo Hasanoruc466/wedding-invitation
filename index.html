@@ -712,6 +712,13 @@
     var pvOpen  = false;
     var opened  = false;
 
+    /* ── Tüm fotoğrafları önceden yükle ── */
+    var preloadedImages = photos.map(function(src) {
+      var img = new Image();
+      img.src = src;
+      return img;
+    });
+
     /* ── Hoşgeldiniz ekranını kapat, müziği başlat ── */
     welcomeScreen.addEventListener('click', function () {
       bgAudio.volume = 0.55;
@@ -764,10 +771,21 @@
         pvImg.style.opacity = '0';
         setTimeout(function () {
           currentPhoto++;
-          pvImg.src = photos[currentPhoto];
           pvImg.alt = 'Fotoğraf ' + (currentPhoto + 1);
           pvCounter.textContent = (currentPhoto + 1) + ' / ' + photos.length;
-          pvImg.style.opacity = '';
+
+          function revealImg() {
+            pvImg.style.opacity = '';
+            pvImg.onload = null;
+          }
+
+          pvImg.onload = revealImg;
+          pvImg.src = photos[currentPhoto];
+
+          /* Görsel zaten preload'dan cache'deyse onload tetiklenmeyebilir */
+          if (pvImg.complete && pvImg.naturalWidth > 0) {
+            revealImg();
+          }
         }, 250);
       } else {
         /* Son fotoğraf geçildi — davetiyeyi göster */
