@@ -457,7 +457,8 @@
       flex: 1;
       text-decoration: none;
       color: inherit;
-      display: block;
+      display: flex;
+      flex-direction: column;
       padding: 0.6rem 0.4rem;
       border-radius: 3px;
       transition: background 0.2s ease;
@@ -520,14 +521,45 @@
       font-size: 0.78rem;
       color: #5a5a5a;
       line-height: 1.55;
-      margin: 0;
+      margin: 0 0 0.75rem;
+      flex: 1;
+    }
+
+    .event-maps-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      margin-top: auto;
+      transition: color 0.2s ease;
+    }
+
+    .event-col:hover .event-maps-hint {
+      color: #1a1a1a;
+    }
+
+    .event-maps-hint svg {
+      width: 11px;
+      height: 11px;
+      fill: currentColor;
+      flex-shrink: 0;
     }
 
     @media (max-width: 520px) {
       .card          { padding: 2rem 1.2rem 1.8rem; }
       .card-families { gap: 2rem; }
-      .card-events   { gap: 0.8rem; }
+      .card-events   { gap: 0.6rem; flex-wrap: nowrap; }
       .card-script-names { font-size: 2.4rem; }
+      .event-date    { font-size: 0.88rem; }
+      .event-day     { font-size: 0.82rem; }
+      .event-venue   { font-size: 0.68rem; }
+      .event-address { font-size: 0.7rem; }
+      .event-maps-hint { font-size: 0.62rem; letter-spacing: 0.1em; }
     }
 
     /* ════════════════════════════════════════
@@ -555,6 +587,13 @@
     .welcome-screen.hide {
       opacity: 0;
       pointer-events: none;
+    }
+
+    .welcome-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      color: var(--text-dark);
+      line-height: 1.1;
     }
 
     .welcome-title {
@@ -593,6 +632,7 @@
   <!-- ── Hoşgeldiniz ekranı ── -->
   <div class="welcome-screen" id="welcome-screen">
     <div class="welcome-pulse">&#10022;</div>
+    <p class="welcome-names">Berfin &amp; Hamdullah</p>
     <h1 class="welcome-title">Hoşgeldiniz</h1>
     <p class="welcome-sub">Devam etmek için tıklayın</p>
   </div>
@@ -663,6 +703,10 @@
           <p class="event-day">Çarşamba 19.00</p>
           <p class="event-venue">BEYAZ İNCİ BAHÇE</p>
           <p class="event-address">Çamtepe Mah. Halep bulvarı No:8<br>Şahinbey/Gaziantep</p>
+          <span class="event-maps-hint">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Yol tarifi için tıklayın
+          </span>
         </a>
 
         <!-- DÜĞÜN -->
@@ -679,6 +723,10 @@
           <p class="event-day">Cumartesi 18.00</p>
           <p class="event-venue">SOLHAN DÜĞÜN SALONU</p>
           <p class="event-address">Turgut Özal Mah. 1059. Sk. 7/1<br>Kızıltepe/Mardin</p>
+          <span class="event-maps-hint">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Yol tarifi için tıklayın
+          </span>
         </a>
 
       </div>
