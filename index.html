@@ -563,6 +563,184 @@
     }
 
     /* ════════════════════════════════════════
+       Sayaç ekranı
+    ════════════════════════════════════════ */
+    .countdown {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.7s ease, visibility 0s linear 0.7s;
+    }
+    .countdown.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity 0.7s ease, visibility 0s linear;
+    }
+    .cd-card {
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 2.8rem 2.5rem 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.14);
+      transform: translateY(28px);
+      transition: transform 0.7s ease;
+    }
+    .countdown.is-visible .cd-card { transform: translateY(0); }
+    .cd-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.2rem, 7vw, 3rem);
+      color: #1a1a1a;
+      margin-bottom: 0.3rem;
+    }
+    .cd-rule {
+      width: 50%;
+      height: 1px;
+      background: #1a1a1a;
+      margin: 0.5rem auto 0.8rem;
+    }
+    .cd-label {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+    .cd-units {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 1.6rem;
+    }
+    .cd-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 60px;
+    }
+    .cd-num {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.4rem, 8vw, 3.2rem);
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1;
+      min-width: 2ch;
+      text-align: center;
+    }
+    .cd-sep {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: #ccc;
+      line-height: 1;
+      padding-top: 0.05rem;
+    }
+    .cd-unit-label {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: #888;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+    .cd-date {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      color: #5a5a5a;
+    }
+    .cd-done {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: #1a1a1a;
+      display: none;
+      margin-top: 0.8rem;
+    }
+
+    /* ════════════════════════════════════════
+       Sayfa geçiş ok tuşları
+    ════════════════════════════════════════ */
+    /* ── Nav bar: masaüstü yanlarda, mobil altta pill ── */
+    /* ── Nokta göstergesi ── */
+    .nav-dots {
+      position: fixed;
+      bottom: 1.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      z-index: 500;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .nav-dots.is-visible { opacity: 1; }
+    .nav-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.2);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .nav-dot.active { background: #1a1a1a; transform: scale(1.38); }
+
+    /* ── Masaüstü ok butonları ── */
+    .nav-arrow {
+      display: none;
+    }
+    @media (min-width: 601px) {
+      .nav-dots { bottom: 1.2rem; }
+      .nav-arrow {
+        display: flex;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 500;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(0,0,0,0.15);
+        background: rgba(255,255,255,0.88);
+        backdrop-filter: blur(4px);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #3a3a3a;
+        opacity: 0;
+        pointer-events: none;
+        transition: background 0.2s ease, transform 0.15s ease, opacity 0.5s ease;
+      }
+      .nav-arrow.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-arrow#nav-prev { left: 0.8rem; }
+      .nav-arrow#nav-next { right: 0.8rem; }
+      .nav-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+      .nav-arrow:active { transform: translateY(-50%) scale(0.93); }
+      .nav-arrow svg {
+        width: 18px; height: 18px;
+        fill: none; stroke: currentColor;
+        stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+      }
+      .nav-arrow.disabled { opacity: 0.2 !important; pointer-events: none; }
+    }
+    @media (max-width: 600px) {
+      .cd-card { padding: 2rem 1.2rem 1.8rem; }
+      .cd-unit { min-width: 48px; }
+    }
+
+    /* ════════════════════════════════════════
        Hoşgeldiniz ekranı
     ════════════════════════════════════════ */
     .welcome-screen {
@@ -734,6 +912,52 @@
     </div>
   </div>
 
+  <!-- ── Sayaç ekranı ── -->
+  <div class="countdown" id="countdown" aria-hidden="true">
+    <div class="cd-card">
+      <h2 class="cd-names">Berfin &amp; Hamdullah</h2>
+      <div class="cd-rule"></div>
+      <p class="cd-label">Düğüne kalan süre</p>
+      <div class="cd-units">
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-gun">00</span>
+          <span class="cd-unit-label">Gün</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-saat">00</span>
+          <span class="cd-unit-label">Saat</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-dak">00</span>
+          <span class="cd-unit-label">Dakika</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-san">00</span>
+          <span class="cd-unit-label">Saniye</span>
+        </div>
+      </div>
+      <p class="cd-date">27 Haziran 2026 &middot; Cumartesi 18:00</p>
+      <p class="cd-done" id="cd-done">Mutlu Yıllar &#10022;</p>
+    </div>
+  </div>
+
+  <!-- ── Masaüstü ok butonları ── -->
+  <button class="nav-arrow disabled" id="nav-prev" aria-label="Önceki sayfa">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="nav-arrow" id="nav-next" aria-label="Sonraki sayfa">
+    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+
+  <!-- ── Nokta göstergesi ── -->
+  <div class="nav-dots" id="nav-dots">
+    <div class="nav-dot active" id="dot-0"></div>
+    <div class="nav-dot" id="dot-1"></div>
+  </div>
+
   <script>
     var welcomeScreen = document.getElementById('welcome-screen');
     var bgAudio      = document.getElementById('bg-audio');
@@ -741,7 +965,91 @@
     var hint        = document.getElementById('hint');
     var divider     = document.getElementById('divider');
     var invitation  = document.getElementById('invitation');
-    var opened  = false;
+    var countdownEl = document.getElementById('countdown');
+    var navDots  = document.getElementById('nav-dots');
+    var navPrev  = document.getElementById('nav-prev');
+    var navNext  = document.getElementById('nav-next');
+    var opened   = false;
+
+    var pages   = [invitation, countdownEl];
+    var dots    = [document.getElementById('dot-0'), document.getElementById('dot-1')];
+    var curPage = 0;
+
+    /* ── Geri sayım ── */
+    var TARGET = new Date('2026-06-27T18:00:00');
+    function pad2(n) { return String(n).padStart(2, '0'); }
+    function tickCountdown() {
+      var diff = TARGET - new Date();
+      if (diff <= 0) {
+        ['cd-gun','cd-saat','cd-dak','cd-san'].forEach(function(id){
+          document.getElementById(id).textContent = '00';
+        });
+        document.getElementById('cd-done').style.display = 'block';
+        return;
+      }
+      document.getElementById('cd-gun').textContent  = pad2(Math.floor(diff / 86400000));
+      document.getElementById('cd-saat').textContent = pad2(Math.floor((diff % 86400000) / 3600000));
+      document.getElementById('cd-dak').textContent  = pad2(Math.floor((diff % 3600000)  / 60000));
+      document.getElementById('cd-san').textContent  = pad2(Math.floor((diff % 60000)    / 1000));
+    }
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+
+    /* ── Sayfa geçişi ── */
+    function goToPage(n) {
+      if (n < 0 || n >= pages.length) return;
+      pages[curPage].classList.remove('is-visible');
+      pages[curPage].setAttribute('aria-hidden', 'true');
+      dots[curPage].classList.remove('active');
+      curPage = n;
+      pages[curPage].classList.add('is-visible');
+      pages[curPage].setAttribute('aria-hidden', 'false');
+      dots[curPage].classList.add('active');
+      navPrev.classList.toggle('disabled', curPage === 0);
+      navNext.classList.toggle('disabled', curPage === pages.length - 1);
+    }
+
+    navPrev.addEventListener('click', function () { goToPage(curPage - 1); });
+    navNext.addEventListener('click', function () { goToPage(curPage + 1); });
+
+    /* ── Klavye (masaüstü) ── */
+    document.addEventListener('keydown', function (e) {
+      if (!navDots.classList.contains('is-visible')) return;
+      if (e.key === 'ArrowLeft')  goToPage(curPage - 1);
+      if (e.key === 'ArrowRight') goToPage(curPage + 1);
+    });
+
+    /* ── Mouse wheel / trackpad kaydırma (masaüstü) ── */
+    var wheelLock = false;
+    document.addEventListener('wheel', function (e) {
+      if (!navDots.classList.contains('is-visible')) return;
+      if (wheelLock) return;
+      wheelLock = true;
+      setTimeout(function () { wheelLock = false; }, 700);
+      if (e.deltaX > 30 || e.deltaY > 30)  goToPage(curPage + 1);
+      if (e.deltaX < -30 || e.deltaY < -30) goToPage(curPage - 1);
+    }, { passive: true });
+
+    /* ── Dokunmatik kaydırma (swipe) ── */
+    var swipeStartX = null;
+    var swipeStartY = null;
+    document.addEventListener('touchstart', function (e) {
+      if (!navDots.classList.contains('is-visible')) return;
+      swipeStartX = e.touches[0].clientX;
+      swipeStartY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+      if (swipeStartX === null) return;
+      var dx = e.changedTouches[0].clientX - swipeStartX;
+      var dy = e.changedTouches[0].clientY - swipeStartY;
+      swipeStartX = null;
+      swipeStartY = null;
+      /* yatay hareket dikey hareketinden büyükse ve 45px eşiği geçmişse */
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 45) {
+        if (dx < 0) goToPage(curPage + 1); /* sola kaydır → sonraki */
+        else        goToPage(curPage - 1); /* sağa kaydır → önceki */
+      }
+    }, { passive: true });
 
     /* ── Hoşgeldiniz ekranını kapat, müziği başlat ── */
     welcomeScreen.addEventListener('click', function () {
@@ -770,6 +1078,10 @@
       setTimeout(function () {
         invitation.setAttribute('aria-hidden', 'false');
         invitation.classList.add('is-visible');
+        navDots.classList.add('is-visible');
+        navPrev.classList.add('is-visible');
+        navNext.classList.add('is-visible');
+        navPrev.classList.add('disabled');
       }, 950);
     }
 
